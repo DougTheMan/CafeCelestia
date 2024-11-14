@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config['UPLOAD_FILES'] = r'static/img/'
+app.config['UPLOAD_FILES'] = 'static/img/'
 #Funfou
 
 

@@ -113,77 +113,114 @@ class ItensForm(FlaskForm):
 
 
     def save(self):
+        # #pega foto do form, transforma em seguro, vai ver se não tem dropdatabase.png
+        # foto = self.foto.data
+        # nome_seguro = secure_filename(foto.filename)
+
+        # if self.foto2.data != None:
+        #     foto2 = self.foto2.data
+        #     nome_seguro2 = secure_filename(foto2.filename)
+        # else:
+        #     nome_seguro2=None
+
+        # if self.foto3.data != None:
+        #     foto3 = self.foto3.data
+        #     nome_seguro3 = secure_filename(foto3.filename)
+        # else:
+        #     nome_seguro3=None
+
+        # if self.foto4.data != None:
+        #     foto4 = self.foto4.data
+        #     nome_seguro4 = secure_filename(foto4.filename)
+        # else:
+        #     nome_seguro4=None
+
+        # add = Itens(
+        #     titulo = self.titulo.data,
+        #     descricao = self.descricao.data,
+        #     qntdestoque = self.qntdestoque.data,
+        #     preco = self.preco.data,
+        #     especial = self.especial.data,
+        #     foto=nome_seguro,    #salvo em seguro
+        #     foto2 = nome_seguro2,
+        #     foto3 = nome_seguro3,
+        #     foto4 = nome_seguro4
+
+        # )
+        # #caminho da foto
+        # caminho = os.path.join(
+        #     #pegar a pasta que está nosso projeto
+        #     os.path.abspath(os.path.dirname(__file__)),
+        #     #define pasta que configuramos para upload
+        #     app.config['UPLOAD_FILES'],
+        #     #A pasta que está para Post
+        #     'fotos',nome_seguro
+        # )
+        
+        # if nome_seguro2 != None:
+        #     caminho2 = os.path.join(
+        #         #pegar a pasta que está nosso projeto
+        #         os.path.abspath(os.path.dirname(__file__)),
+        #         #define pasta que configuramos para upload
+        #         app.config['UPLOAD_FILES'],
+        #         #A pasta que está para Post
+        #         'fotos',nome_seguro2
+        #     )
+
+        # if nome_seguro3 != None:
+        #     caminho3 = os.path.join(
+        #         #pegar a pasta que está nosso projeto
+        #         os.path.abspath(os.path.dirname(__file__)),
+        #         #define pasta que configuramos para upload
+        #         app.config['UPLOAD_FILES'],
+        #         #A pasta que está para Post
+        #         'fotos',nome_seguro3
+        #     )
+
+        # if nome_seguro4 != None:
+        #     caminho4 = os.path.join(
+        #         #pegar a pasta que está nosso projeto
+        #         os.path.abspath(os.path.dirname(__file__)),
+        #         #define pasta que configuramos para upload
+        #         app.config['UPLOAD_FILES'],
+        #         #A pasta que está para Post
+        #         'fotos',nome_seguro4
+        #     )
+        #     #da erro quando tenta postar menos que 4 fotos, não entendo.
+        #     #se você postar 1 imagem, da erro. se você tentar preencher o formulário colocando outra foto da certo. UE
+        # foto.save(caminho)
+        # if nome_seguro2 != None:
+        #     foto2.save(caminho2)
+        # elif nome_seguro2 != None:
+        #     foto3.save(caminho3)  
+        # elif nome_seguro2 != None:
+        #     foto4.save(caminho4)
+
+        # db.session.add(add)
+        # db.session.commit()
+        #Algum motivo essa é a versão antiga que funciona 
 
         #pega foto do form, transforma em seguro, vai ver se não tem dropdatabase.png
-
         foto = self.foto.data
         nome_seguro = secure_filename(foto.filename)
 
-        caminho = os.path.join(
-            #pegar a pasta que está nosso projeto
-            os.path.abspath(os.path.dirname(__file__)),
-            #define pasta que configuramos para upload
-            app.config['UPLOAD_FILES'],
-            #A pasta que está para Post
-            'fotos',nome_seguro
-        )
-
-        foto.save(caminho)
-
         if self.foto2.data != None:
-
             foto2 = self.foto2.data
             nome_seguro2 = secure_filename(foto2.filename)
-
-            caminho2 = os.path.join(
-                #pegar a pasta que está nosso projeto
-                os.path.abspath(os.path.dirname(__file__)),
-                #define pasta que configuramos para upload
-                app.config['UPLOAD_FILES'],
-                #A pasta que está para Post
-                'fotos',nome_seguro2
-            )
-
-            foto2.save(caminho2)
         else:
             nome_seguro2 = None
 
         if self.foto3.data != None:
             foto3 = self.foto3.data
             nome_seguro3 = secure_filename(foto3.filename)
-
-            caminho3 = os.path.join(
-                #pegar a pasta que está nosso projeto
-                os.path.abspath(os.path.dirname(__file__)),
-                #define pasta que configuramos para upload
-                app.config['UPLOAD_FILES'],
-                #A pasta que está para Post
-                'fotos',nome_seguro3
-            )
-
-            foto3.save(caminho3)
         else:
             nome_seguro3 = None
-
+        
         if self.foto4.data != None:
             foto4 = self.foto4.data
             nome_seguro4 = secure_filename(foto4.filename)
-            #acho que o erro é que ele se enrola nesses if e fracassa o resto
-            caminho4 = os.path.join(
-                #pegar a pasta que está nosso projeto
-                os.path.abspath(os.path.dirname(__file__)),
-                #define pasta que configuramos para upload
-                app.config['UPLOAD_FILES'],
-                #A pasta que está para Post
-                'fotos',nome_seguro4
-            )
-
-            foto4.save(caminho4)
         else:
             nome_seguro4 = None
-            #Funciona. Como? parece que depende de computador ou algo do tipo
-            #Porra, não entendo pq, ele tenta salvar o arquivo mas acha que o arquivo está em outro pc
-            #exemplo: no mue pc em guaramirim funciona tudo. Aqui em senai não. QUE? 
 
         add = Itens(
             titulo = self.titulo.data,
@@ -192,13 +229,54 @@ class ItensForm(FlaskForm):
             preco = self.preco.data,
             especial = self.especial.data,
             foto=nome_seguro,    #salvo em seguro
-            foto2=nome_seguro2,
-            foto3=nome_seguro3,
-            foto4=nome_seguro4
+            foto2 = nome_seguro2,
+            foto3 = nome_seguro3,
+            foto4 = nome_seguro4
+
+        )
+        #caminho da foto
+        caminho = os.path.join(
+            #pegar a pasta que está nosso projeto
+            os.path.abspath(os.path.dirname(__file__)),
+            #define pasta que configuramos para upload
+            app.config['UPLOAD_FILES'],
+            #A pasta que está para Post
+            'fotos',nome_seguro
         )
         
-            #da erro quando tenta postar menos que 4 fotos, não entendo.
-            #se você postar 1 imagem, da erro. se você tentar preencher o formulário colocando outra foto da certo. UE
+        if nome_seguro2 != None:
+            caminho2 = os.path.join(
+                #pegar a pasta que está nosso projeto
+                os.path.abspath(os.path.dirname(__file__)),
+                #define pasta que configuramos para upload
+                app.config['UPLOAD_FILES'],
+                #A pasta que está para Post
+                'fotos',nome_seguro2
+            )
+            foto2.save(caminho2)
+        elif nome_seguro3 != None:
+            caminho3 = os.path.join(
+                #pegar a pasta que está nosso projeto
+                os.path.abspath(os.path.dirname(__file__)),
+                #define pasta que configuramos para upload
+                app.config['UPLOAD_FILES'],
+                #A pasta que está para Post
+                'fotos',nome_seguro3
+            )
+            foto3.save(caminho3)
+        elif nome_seguro4 != None:
+            caminho4 = os.path.join(
+                #pegar a pasta que está nosso projeto
+                os.path.abspath(os.path.dirname(__file__)),
+                #define pasta que configuramos para upload
+                app.config['UPLOAD_FILES'],
+                #A pasta que está para Post
+                'fotos',nome_seguro4
+            )
+            foto4.save(caminho4)
+            #deu certo????????????? o flask não segura direito o envio de dados
+
+        foto.save(caminho)
 
         db.session.add(add)
         db.session.commit()
